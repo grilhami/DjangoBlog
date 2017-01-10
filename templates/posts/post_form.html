@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block head_extra %}
+	{{ form.media }}
+{% endblock head_extra %}
+{% block content %}
+	<h1>Form</h1>
+	<div class="small-6 small-offset-2 columns">
+		<form method="POST" enctype="multipart/form-data" action="">{% csrf_token %}
+			{{form.as_p}}
+			<input class="button" type="submit" value="submit">
+		</form>
+	</div>
+{% endblock content %}

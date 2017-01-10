@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre|Open+Sans|Roboto');
+
+html, body,
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family:'Open Sans', 'serif' !important;
+}
+
+h1 {
+    color:#b39247;
+}
+a:hover {
+  text-decoration:none;
+  }
+
+/*-- menu --*/
+.nav-menu {
+    background-color:#C1151B;
+    color:#fff;
+}
+.nav-menu ul{
+    background-color:#C1151B;
+    color:#fff;
+}
+
+.nav-menu a{
+    color:#fff;
+}
+.navbar-form {
+    width: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-right: 0;
+    margin-left: 0;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    display:inline-block;
+}
+  
+.is-dropdown-submenu {
+    border:none !important;
+}

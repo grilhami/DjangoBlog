@@ -1,0 +1,45 @@
+<div class="title-bar" data-responsive-toggle="toogle-menu" data-hide-for="medium">
+  <button class="menu-icon" type="button" data-toggle="toggle-menu"></button>
+  <div class="title-bar-title">Menu</div>
+</div>
+<div data-sticky-container class="nav-menu top-bar" id="toggle-menu">
+  <div class="nav-menu top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text"><a href="{% url 'home' %}">Django Blog</a></li>
+      <li><a href="{% url 'posts:list' %}">Post</a>
+      <ul class="menu vertical">
+        <li><a href="{% url 'posts:create' %}">Create New</a></li>
+      </ul>
+    </li>
+    <li><a href="#">About</a></li>
+  </ul>
+</div>
+
+<!--    
+<div class="ui secondary  menu">
+  <a class="item">
+    Home
+  </a>
+  <a class="item">
+    Messages
+  </a>
+  <a class="item active">
+    Friends
+  </a>
+  <div class="right menu">
+    <div class="item">
+      <div class="ui icon input">
+        <input placeholder="Search..." type="text">
+        <i class="search link icon"></i>
+      </div>
+    </div>
+    <a class="ui item">
+      Logout
+    </a>
+  </div>
+</div>
+<div class="nav-menu top-bar-right">
+  <ul class="menu">
+  </ul>
+</div>
+</div> -->
