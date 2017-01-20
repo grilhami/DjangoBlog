@@ -12,8 +12,8 @@
 
 {% block content %}
 <div class="row">
-<p><a href="{% url 'posts:list' %}">back to list </a> </p>
-<div class="medium-8 medium-offset-2 columns">
+<p><a href="{% url 'posts:list' %}">back to feed </a> </p>
+<div class="col-md-8 col-md-offset-2 columns">
     <div class="row">
     {% if instance.image %}
     <img src=" {{ instance.image.url }} " class="img-responsive"/>

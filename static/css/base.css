@@ -16,7 +16,18 @@ a:hover {
   text-decoration:none;
   }
 
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+
 /*-- menu --*/
+
+.navbar {
+    border-radius: 0px;
+}
+
 .nav-menu {
     background-color:#C1151B;
     color:#fff;
@@ -43,4 +54,19 @@ a:hover {
   
 .is-dropdown-submenu {
     border:none !important;
+}
+
+
+.navbar-default {
+    background-color: #F9968F;
+    border-color: #F9968F;
+}
+
+.navbar-default .navbar-nav > li > a{
+    color: #ffffff;
+    background-color: transparent;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #f21328;
+    background-color: transparent;
 }

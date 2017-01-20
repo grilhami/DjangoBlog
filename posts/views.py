@@ -11,10 +11,16 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
+
+# views
+from django.views.generic import ListView, CreateView, DetailView, DeleteView
+
 #model
 from .models import Post
 from .forms import PostForm
 
+
+@login_required:
 def post_list(request):
     # if request.user.is_authenticated():
 
@@ -39,11 +45,14 @@ def post_list(request):
     except EmptyPage:
        queryset = paginator.page(paginator.num_pages)
 
-    context = {
-       "object_list": queryset,
-       "title": "List"
-      }
-    return render(request,"posts/post_list.html", context)
+    # context = {
+    #    "object_list": queryset,
+    #    "title": "List"
+    #   }
+    return render(request,"posts/post_list.html",{
+        "object_list": queryset,
+        "title": "List"
+        })
 
 def post_create(request):
     if not request.user.is_staff or not request.user.is_superuser:

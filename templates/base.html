@@ -3,13 +3,16 @@
 <html>
   <head>
   <title>{% block head_title %} Try Django 1.9 {% endblock head_title %}</title>
-  <link rel="stylesheet" href="{% static 'css/foundation.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
   <link rel="stylesheet" href='{% static "css/base.css" %}' />
   {% block head_extra %}
   {% endblock head_extra %}
 </head>
 <body>
   {% include 'navbar.html' %}
+  <div class="container">
+
+
   <div id="fb-root"></div>
   <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -25,8 +28,9 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=522313097949783";
   fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>
-  {% include "messages_display.html" %}
+  {% include 'messages_display.html' %}
 {% block content %}{% endblock content %}
 {% include 'javascripts.html' %}
+  </div>
 </body>
 </html>

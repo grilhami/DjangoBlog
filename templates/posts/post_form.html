@@ -3,7 +3,7 @@
 	{{ form.media }}
 {% endblock head_extra %}
 {% block content %}
-	<h1>Form</h1>
+	<h1>Create an article</h1>
 	<div class="small-6 small-offset-2 columns">
 		<form method="POST" enctype="multipart/form-data" action="">{% csrf_token %}
 			{{form.as_p}}
