@@ -6,21 +6,13 @@ from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.conf import settings
 from django.utils import timezone
+from core.models import TimestampedModel
 
-class TimeStampedModel(models.Model):
 
-    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
-
-    class Meta:
-        abstract = True
-        ordering = ['-date_created', '-date_updated']
 
 class PostManager(models.Manager):
     def active(self, *args, **kwargs):
-        return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())    
-
-
+        return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
 def upload_location(instance, filename):
     return "{}/{}".format(instance.id, filename)
@@ -52,7 +44,7 @@ class Post(models.Model):
     def get_absolute_url(self):
         #return "/posts/%s/" % (self.id)
         return reverse("posts:detail", kwargs={"slg":self.slg})
-    
+
     def get_id_url(self):
         return reverse("posts:detail", kwargs={"id":self.id})
 
@@ -79,11 +71,11 @@ pre_save.connect(pre_save_post_receiver, sender=Post)
 
 # class Comment(models.Model):
 
-#     user = models.ForeignKey(User, on_delete="CASCADE") 
+#     user = models.ForeignKey(User, on_delete="CASCADE")
 #     contents = models.TextField(max_length=200)
 
 #     def __str__(self):
-#         return self.content 
+#         return self.content
 
 #     def __unicode__(self):
 #         return self.content

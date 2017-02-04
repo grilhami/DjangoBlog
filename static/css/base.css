@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre|Open+Sans|Roboto');
 
+body {
+ padding-top:120px;
+ height:100%;
+}
+
+.container {
+    min-height:100%;
+}
+
 html, body,
 h1,
 h2,

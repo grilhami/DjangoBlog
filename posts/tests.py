@@ -3,11 +3,20 @@ from django.utils import timezone
 from .models import Post
 import datetime
 
+class PostViewTest(TestCase):
+
+    def test_home(self):
+        response = self.client.get('/')
+        self.assertContains(response, 1, 200)
+
+    def test_feed(self):
+        response = self.client.get('/posts/')
+        self.assertContains(response, 1, 200)
+
 
 class PostModelTest(TestCase):
 
-    def create_post(self, title="test", content="test content",
-            publish=datetime.now()):
+    def create_post(self, title="test", content="test content"):
         return Post.objects.create(title=title, content=content)
 
     def test_post_creation(self):

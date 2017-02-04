@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
+
+{% if not object_list %}
+        <h1> No Post Found </h1>
+{% endif %}
     <!--     <div class ="row">
         <div class="medium-6 medium-offset-3 columns">
             <p>
@@ -24,7 +28,7 @@
                         <h3><a href="{{obj.get_absolute_url}}">{{obj.title}}</a></h3>
                     </div>
                     <div class="card-section content-markdown">
-{{obj.content|truncatechars:200}}
+{{obj.content|truncatechars_html:30}}
                     </div>
                     <div class="card-section">
                         <p>

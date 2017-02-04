@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.9/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
-
+import os
 from unipath import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -37,13 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     # third party libraries
     'pagedown',
 
     # local apps
+    'core',
     'posts',
-    
+
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -91,12 +92,28 @@ DATABASES = {
 
 DATABASES = {
         'default': {
-            'ENGINE':'django.db.backends.postgresql',
-            'NAME':'trydjango',
-            'USER':'gema',
-            'PASSWORD':'123',
-            'HOST':'localhost',
-            }
+        'ENGINE':'django.db.backends.mysql',
+        'OPTIONS':{
+            'read_default_file': os.path.join(BASE_DIR, 'dbconf.cnf')
+           }
+        }
+        # 'default': {
+        #     'ENGINE':'django.db.backends.postgresql',
+        #     'NAME':'trydjango',
+        #     'USER':'postgres',
+        #     'PASSWORD':'password123',
+        #     'HOST':'localhost',
+        #     }
+    #  'other': {
+    #        'ENGINE':'mysql.connector.django',
+    #        'NAME':'trydjango',
+    #        'USER':'root',
+    #        'PASSWORD':'password123',
+    #        'HOST':'localhost',
+    #        'OPTIONS':{
+    #            'autocommit':True
+    #            }
+
         }
 
 # Password validation
