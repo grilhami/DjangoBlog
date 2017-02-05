@@ -48,6 +48,9 @@ class Post(models.Model):
     def get_id_url(self):
         return reverse("posts:detail", kwargs={"id":self.id})
 
+    def like(self):
+        pass
+
     class Meta:
         ordering = ["-timestamp", "-updated"]
 

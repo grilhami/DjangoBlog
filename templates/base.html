@@ -12,7 +12,9 @@
   {% include 'navbar.html' %}
   <div class="container">
 
-
+  <footer>
+    <p> &copy; Copyright 2017 Django Blog.</p>
+  </footer>  
   <div id="fb-root"></div>
   <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -21,6 +23,7 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=522313097949783";
   fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>
+  
   <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -31,6 +34,7 @@
   {% include 'messages_display.html' %}
 {% block content %}{% endblock content %}
 {% include 'javascripts.html' %}
+
   </div>
 </body>
 </html>
