@@ -1,6 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
 
+    <header class="intro-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Django Blog</h1>
+                        <hr class="small">
+                        <span class="subheading">Write and share your knowledge</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<div class="container">
 {% if not object_list %}
         <h1> No Post Found </h1>
 {% endif %}
@@ -15,42 +29,40 @@
         </div>
     </div>
     -->
+
+
     {% for obj in object_list %}
-      <!--   <div class="row"> -->
-      <div class="row">
-            <div class="col col-lg-8">
-                <div class="card" style="width:100%;margin: 0 auto;">
+
+
+
+     <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-preview">
                     {% if obj.image %}
                         <a href="{{ obj.get_absolute_url }}">
                             <img src="{{obj.image.url}}" class="img-responsive" />
                         </a>
                     {% endif %}
-                    <div class="card-divider">
-                        <h3><a href="{{obj.get_absolute_url}}">{{obj.title}}</a></h3>
-                        <span>author: {{obj.user.username}}</span>
-                    </div>
-                    <div class="card-section content-markdown">
+                    <a href="{{ obj.get_absolute_url }}">
+
+                        <h2 class="post-title">
+                           {{obj.title}}
+                        </h2>
+                        <h3 class="post-subtitle">
 {{obj.content|truncatechars_html:130}}
-                    </div>
-                    <div>
-                     {{ obj.get_markdown }}
-                     </div>
-                    <div class="card-section">
-                        <p>
-                            {{obj.created|timesince}}
-                        </p>
-                        <p>
-                            {{obj.created}}
-                        </p>
-                        <p>
-                            {% if request.user.is_authenticated %}
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by <a href="#">{{obj.user.username}}</a> on {{obj.created}}, {{obj.created|timesince}}</p>
+                </div>
+                
+                {% if request.user.is_authenticated %}
                                 <a href="{{ obj.get_absolute_url}}edit" class="btn btn-default" role="button">Edit</a>
                                 <a href="{{obj.get_absolute_url}}delete" class="btn btn-danger" role="button">Delete</a>
                             {% endif %}
-                        </p>
-                    </div>
-                </div>
-            </div>
+                <hr>
+        </div>
+        </div>
+
       <!--   </div> -->
     {% endfor %}
 
@@ -71,4 +83,6 @@
     {% endif %}
 </ul>
 </div>
+
+</div> <!-- end container -->
 {% endblock content %}

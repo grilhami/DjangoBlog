@@ -1,8 +1,11 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block head_extra %}
-	{{ form.media }}
+{{ form.media }}
 {% endblock head_extra %}
 {% block content %}
+<div style="margin-top: 45px;" class="container">
+<div class="row">
 	<div class="col-sm-6">
 		<h1>Preview</h1>
 		<div class="content-preview">
@@ -13,8 +16,10 @@
 	<div class="col-sm-6">
 		<h1>Create an article</h1>
 		<form method="POST" enctype="multipart/form-data" action="">{% csrf_token %}
-			{{form.as_p}}
-			<input class="button" type="submit" value="submit">
+			{{ form|crispy }}
+			<input class="btn btn-primary" type="submit" value="submit">
 		</form>
 	</div>
+</div>
+</div>
 {% endblock content %}

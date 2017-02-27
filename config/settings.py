@@ -10,11 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 import os
+from .secrets import SECRET_KEY
 from unipath import Path
-from secrets import *
+# from secrets import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = Path(__file__).ancestor(2)
 
 # Quick-start development settings - unsuitable for production
@@ -37,12 +38,15 @@ INSTALLED_APPS = [
 
     # third party libraries
     'pagedown',
+    'crispy_forms',
 
     # local apps
     'core',
     'posts',
 
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,13 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre|Open+Sans|Roboto');
 
 body {
- padding-top:120px;
- height:100%;
+
 }
 
-.container {
-    min-height:100%;
-}
+
 
 html, body,
 h1,
@@ -67,8 +64,8 @@ a:hover {
 
 
 .navbar-default {
-    background-color: #F9968F;
-    border-color: #F9968F;
+    background-color: #EB0319;
+    border:none;
 }
 
 .navbar-default .navbar-nav > li > a{
@@ -76,6 +73,15 @@ a:hover {
     background-color: transparent;
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-    color: #f21328;
+    color: #f2f2f2;
     background-color: transparent;
+}
+
+.wmd-panel{
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+.intro-header {
+    background-image: url('../img/home-bg.jpg');
 }
