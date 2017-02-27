@@ -14,9 +14,43 @@ from .models import Post
 from .forms import PostForm
 
 
+class PostListView(ListView):
+
+    model = Post
+    paginate_by = 3
+    title = "List"
+
+    def get_queryset(self):
+        queryset = Post.objects.active()
+        q = self.request.GET.get("q")
+        if q:
+            queryset = queryset.filter(
+                Q(title__icontains=q)|
+                Q(content__icontains=q)|
+                Q(user__first_name__icontains=q)|
+                Q(user__last_name__icontains=q)
+                ).distinct()
+
+            return queryset
+
+        else:
+            return queryset
+
+class PostDetailView(DetailView):
+
+    model = Post
+
+class PostCreateView(CreateView):
+
+    model = Post
+
+class PostDeleteView(DeleteView):
+
+    model = Post
+
+
 def post_list(request):
     # if request.user.is_authenticated():
-
     today = timezone.now().date()
     queryset_list = Post.objects.active()
 
@@ -43,7 +77,6 @@ def post_list(request):
         "title": "List"
         })
 
-
 @login_required
 def post_create(request):
     if not request.user.is_staff or not request.user.is_superuser:
@@ -63,7 +96,6 @@ def post_create(request):
     })
 
 def post_detail(request, slg=None):
-    #instance = Post.objects.get(Post, id="3")
     instance = get_object_or_404(Post,slg=slg)
     share_string = quote_plus(instance.content)
 

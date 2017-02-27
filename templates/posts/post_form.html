@@ -3,8 +3,15 @@
 	{{ form.media }}
 {% endblock head_extra %}
 {% block content %}
-	<h1>Create an article</h1>
-	<div class="small-6 small-offset-2 columns">
+	<div class="col-sm-6">
+		<h1>Preview</h1>
+		<div class="content-preview">
+			<h3 id="preview-title"></h3>
+			<p id="preview-content"></p>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<h1>Create an article</h1>
 		<form method="POST" enctype="multipart/form-data" action="">{% csrf_token %}
 			{{form.as_p}}
 			<input class="button" type="submit" value="submit">

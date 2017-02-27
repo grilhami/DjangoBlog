@@ -7,6 +7,7 @@ from django.utils.text import slugify
 from django.conf import settings
 from django.utils import timezone
 from core.models import TimestampedModel
+from markdown_deux import markdown
 
 
 
@@ -17,8 +18,8 @@ class PostManager(models.Manager):
 def upload_location(instance, filename):
     return "{}/{}".format(instance.id, filename)
 
-class Post(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,default = 1) #blank=True, null=True
+class Post(TimestampedModel):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,default = 1)
     title = models.CharField(max_length=120)
     slg = models.SlugField(unique=True)
 #   image = models.FileField(blank=True, null=True)
@@ -28,10 +29,10 @@ class Post(models.Model):
     width_field = models.IntegerField(default=0)
     height_field = models.IntegerField(default=0)
     content = models.TextField()
+    likes = models.PositiveIntegerField(default=0)
     draft = models.BooleanField(default=False)
     publish = models.DateTimeField(auto_now=False, auto_now_add=False)
-    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
-    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+
 
     objects = PostManager()
 
@@ -45,14 +46,20 @@ class Post(models.Model):
         #return "/posts/%s/" % (self.id)
         return reverse("posts:detail", kwargs={"slg":self.slg})
 
+    def get_likes(self):
+        return self.likes.count()
+
     def get_id_url(self):
         return reverse("posts:detail", kwargs={"id":self.id})
+
+    def get_markdown(self):
+        content = self.content
+        markdown_text = markdown(content)
+        return markdown_text
 
     def like(self):
         pass
 
-    class Meta:
-        ordering = ["-timestamp", "-updated"]
 
 def create_slug(instance, new_slg=None):
     slg = slugify(instance.title)
@@ -72,7 +79,8 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
 
 pre_save.connect(pre_save_post_receiver, sender=Post)
 
-# class Comment(models.Model):
+
+# class Comment(TimestampedModel):
 
 #     user = models.ForeignKey(User, on_delete="CASCADE")
 #     contents = models.TextField(max_length=200)

@@ -17,7 +17,8 @@
     -->
     {% for obj in object_list %}
       <!--   <div class="row"> -->
-            <div class="col col-lg-8 col-centered">
+      <div class="row">
+            <div class="col col-lg-8">
                 <div class="card" style="width:100%;margin: 0 auto;">
                     {% if obj.image %}
                         <a href="{{ obj.get_absolute_url }}">
@@ -26,13 +27,20 @@
                     {% endif %}
                     <div class="card-divider">
                         <h3><a href="{{obj.get_absolute_url}}">{{obj.title}}</a></h3>
+                        <span>author: {{obj.user.username}}</span>
                     </div>
                     <div class="card-section content-markdown">
-{{obj.content|truncatechars_html:30}}
+{{obj.content|truncatechars_html:130}}
                     </div>
+                    <div>
+                     {{ obj.get_markdown }}
+                     </div>
                     <div class="card-section">
                         <p>
-                            {{obj.timestamp|timesince}}
+                            {{obj.created|timesince}}
+                        </p>
+                        <p>
+                            {{obj.created}}
                         </p>
                         <p>
                             {% if request.user.is_authenticated %}
@@ -47,6 +55,13 @@
     {% endfor %}
 
 <ul class="pagination pagination-sm">
+
+<a href="{{ page_obj.paginator.previous }}">Prev</a>
+{{ page_obj.paginator.num_pages }}
+{{ page_obj.number }}
+<a href="{{ page_obj.paginator.next }}">Next</a>
+
+
     {% if object_list.has_previous %}
         <li> <a href="?page={{ object_list.previous_page_number }}{% if request.GET.q %} &q={{request.GET.q}} {% endif %}"> previous </a> </li>
     {% endif %}
@@ -55,4 +70,5 @@
         <li><a href="?page={{ object_list.next_page_number }}&q={{request.GET.q}}"> next </a></li>
     {% endif %}
 </ul>
+</div>
 {% endblock content %}
