@@ -2,21 +2,42 @@
 {% load crispy_forms_tags %}
 {% block head_extra %}
 {{ form.media }}
+<style type="text/css">
+	.django-mediumeditor-editable {
+    border-radius: 0px;
+    border: 0px;
+    margin: 0px 0px 0px 0px;
+    padding: 5px 6px;
+}
+
+</style>
 {% endblock head_extra %}
 {% block content %}
-<div style="margin-top: 45px;" class="container">
-<div class="row">
-	<div class="col-sm-6">
+<div style="margin-top: 75px;" class="container">
+
+	<!-- <div class="col-sm-6">
 		<h1>Preview</h1>
 		<div class="content-preview">
 			<h3 id="preview-title"></h3>
 			<p id="preview-content"></p>
 		</div>
-	</div>
-	<div class="col-sm-6">
-		<h1>Create an article</h1>
-		<form method="POST" enctype="multipart/form-data" action="">{% csrf_token %}
-			{{ form|crispy }}
+	</div> -->
+	<div class="row">
+	<div class="col-sm-12">
+
+		<form method="POST" enctype="multipart/form-data" action="{% url 'posts:detail' instance.slg %}">{% csrf_token %}
+			<!-- {{ form|crispy }} -->
+			<article>
+      
+                <div class="row">
+						{{form.title}}
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <p>{{form.content}}</p>
+                    </div>
+                </div>
+            
+        </article>
+
 			<input class="btn btn-primary" type="submit" value="submit">
 		</form>
 	</div>

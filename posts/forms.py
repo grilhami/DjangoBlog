@@ -1,14 +1,16 @@
 from django import forms
 
 from pagedown.widgets import PagedownWidget
+from mediumeditor.widgets import MediumEditorTextarea
 
 from .models import Post
 
 
 class PostForm(forms.ModelForm):
 
-    content = forms.CharField(widget=PagedownWidget(show_preview=False))
+    # content = forms.CharField(widget=PagedownWidget(show_preview=False))
     publish = forms.DateField(widget=forms.SelectDateWidget)
+    
 
     class Meta:
     	model = Post
@@ -19,3 +21,11 @@ class PostForm(forms.ModelForm):
         "draft",
         "publish",
     	]
+
+        widgets = {
+            'content': MediumEditorTextarea(),
+        }
+
+class RegistrationForm(forms.Form):
+
+    pass

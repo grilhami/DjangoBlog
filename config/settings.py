@@ -10,9 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 import os
-from .secrets import SECRET_KEY
 from unipath import Path
-# from secrets import *
+
+SECRET_KEY = os.environ['BATMAN_IS_BRUCE_WAYNE']
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +24,6 @@ BASE_DIR = Path(__file__).ancestor(2)
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -39,6 +38,7 @@ INSTALLED_APPS = [
     # third party libraries
     'pagedown',
     'crispy_forms',
+    'mediumeditor',
 
     # local apps
     'core',
@@ -82,14 +82,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-"""
 
 DATABASES = {
         'default': {
@@ -156,7 +148,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-        BASE_DIR.child("static"),
+        os.path.join(BASE_DIR, "static")
         #'/var/www/static',
         ]
 
@@ -166,4 +158,32 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR.ancestor(1).child("media_cdn")
 
-#MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
+
+# Theme options `default`, `roman`, `mani`, `flat`, `bootstrap`, `tim`, `beagle`
+MEDIUM_EDITOR_THEME = 'beagle' # `default` is defualt theme
+MEDIUM_EDITOR_OPTIONS = {
+ 'toolbar': {
+        'static': True,
+        'buttons': [
+            'bold',
+            'italic',
+            'underline',
+            # 'strikethrough',
+            'subscript',
+            'superscript',
+            'h1',
+            'h2',
+            'h3',
+            'quote',
+        ]
+    },
+    'paste': {
+        'imageDragging': True,
+        'forcePlainText': True,
+        'cleanPastedHTML': False,
+        'cleanReplacements': [],
+        'cleanAttrs': ['class', 'style', 'dir'],
+        'cleanTags': ['meta']
+    }
+
+}

@@ -134,3 +134,12 @@ def post_delete(request, slg=None):
     messages.success(request, "Deleted")
     
     return redirect("posts:list")
+
+
+# def search(request):
+
+#     q = request.GET.get("q")
+
+#     return render("posts:list",{
+        
+#         })
