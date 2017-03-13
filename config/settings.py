@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'mediumeditor',
 
     # local apps
+    'authentication',
     'core',
     'posts',
 
