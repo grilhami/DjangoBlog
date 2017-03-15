@@ -88,9 +88,9 @@ def post_create(request):
         tits = form.cleaned_data.get("title")
         print (tits)
         instance.save()
-
         return HttpResponseRedirect(instance.get_absolute_url())
-        messages.success(request, "Successfully Created")
+
+        # messages.success(request, "Successfully Created")
     return render(request, "posts/post_form.html",{
                 "form":form,
     })
@@ -116,7 +116,7 @@ def post_update(request, slg=None):
         instance = form.save(commit=False)
         instance.save()
         return HttpResponseRedirect(instance.get_absolute_url())
-        messages.success(request, "Saved", extra_tags='some-tags')
+        # messages.success(request, "Saved", extra_tags='some-tags')
 
     return render(request, "posts/post_form.html", {
         "title": instance.title,

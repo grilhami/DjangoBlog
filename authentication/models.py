@@ -6,3 +6,12 @@ from django.contrib.auth.models import (
 )
 from core.models import TimestampedModel
 import jwt
+
+
+class UserManager(BaseUserManager):
+	
+	pass
+	
+class User(AbstractBaseUser):
+	
+	pass

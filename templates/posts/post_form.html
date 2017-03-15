@@ -25,9 +25,9 @@
 	<div class="row">
 	<div class="col-sm-12">
 
-		<form method="POST" enctype="multipart/form-data" action="{% url 'posts:detail' instance.slg %}">{% csrf_token %}
-			<!-- {{ form|crispy }} -->
-			<article>
+		<form method="POST" enctype="multipart/form-data" action="">{% csrf_token %}
+		{{ form|crispy }}
+			{% comment %}<article>
       
                 <div class="row">
 						{{form.title}}
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             
-        </article>
+        </article>{% endcomment %}
 
 			<input class="btn btn-primary" type="submit" value="submit">
 		</form>

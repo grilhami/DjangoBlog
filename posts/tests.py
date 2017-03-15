@@ -24,9 +24,9 @@ class PostModelTest(TestCase):
 
     def test_post_creation(self):
 
-        new = self.create_post()
-        self.assertEqual(isinstance(new, Post))
-        self.assertEqual(new.user.id, 1)
-        self.assertEqual(new.__str__, new.title)
-        self.asserEqual(new.title, "test")
+        new_post = self.create_post()
+        self.assertEqual(isinstance(new_post, Post))
+        self.assertEqual(new_post.user.id, 1)
+        self.assertEqual(new_post.__str__, new.title)
+        self.asserEqual(new_post.title, "test")
 
