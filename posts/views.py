@@ -9,10 +9,15 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # views
 from django.views.generic import ListView, CreateView, DetailView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 #model
 from .models import Post
 from .forms import PostForm
 
+
+class TitleSearchMixins(object):
+
+    pass
 
 class PostListView(ListView):
 
@@ -135,11 +140,25 @@ def post_delete(request, slg=None):
     
     return redirect("posts:list")
 
+def search(request):
+    
+    error = False
+    queryset_list = Post.objects.active()
+    
+    if 'q' in request.GET:
+        q = request.GET.get("q")
+        if not q:
+            error = True
+        elif len(q) > 20:
+            error = True
+        else:
+            queryset_list = queryset_list.filter(
+                Q(title__icontains=q)|
+                Q(content__icontains=q)|
+                Q(user__first_name__icontains=q)|
+                Q(user__last_name__icontains=q)
+                ).distinct()
 
-# def search(request):
-
-#     q = request.GET.get("q")
-
-#     return render("posts:list",{
-        
-#         })
+    return render("posts:list",{
+        "object_list":queryset_list 
+        })
