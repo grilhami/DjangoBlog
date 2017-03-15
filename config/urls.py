@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 from .views import IndexView
+from posts.views import search
 
 
 urlpatterns = [
@@ -11,6 +12,7 @@ urlpatterns = [
   # url(r'^$', include("posts.urls", namespace='posts')),
     url(r'^$', IndexView.as_view(), name='home'),
     url(r'^admin/', admin.site.urls),
+    url(r'^search/', search , name="search"),
     url(r'^posts/', include("posts.urls", namespace='posts')),
 
 ]

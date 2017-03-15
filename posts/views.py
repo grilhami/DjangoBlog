@@ -15,7 +15,7 @@ from .models import Post
 from .forms import PostForm
 
 
-class TitleSearchMixins(object):
+class SearchMixins(object):
 
     pass
 
@@ -159,6 +159,6 @@ def search(request):
                 Q(user__last_name__icontains=q)
                 ).distinct()
 
-    return render("posts:list",{
+    return render(request, "posts/post_list.html",{
         "object_list":queryset_list 
         })
