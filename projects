@@ -28,8 +28,8 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=1
+current_page=3
 FILE_NAME_0=249;Python;0;EUTF-8;1;1;0;%2Fhome%2Fgema%2FA%2FPyProject%2Ftrydjango19%2Fsrc%2Fmanage.py;0;4
-FILE_NAME_1=1515;Python;0;EUTF-8;1;1;0;%2Fhome%2Fgema%2FA%2FPyProject%2Ftrydjango19%2Fsrc%2Fposts%2Fmodels.py;0;4
-FILE_NAME_2=67;Python;0;EUTF-8;1;1;0;%2Fhome%2Fgema%2FA%2FPyProject%2Ftrydjango19%2Fsrc%2Fposts%2Fserializers.py;0;4
-FILE_NAME_3=307;Python;0;EUTF-8;1;1;0;%2Fhome%2Fgema%2FA%2FPyProject%2Ftrydjango19%2Fsrc%2Fauthentication%2Fmodels.py;0;4
+FILE_NAME_1=0;CSS;0;EUTF-8;1;1;0;%2Fhome%2Fgema%2FDownloads%2Fauto-hiding-navigation%2Fauto-hiding-navigation%2Fcss%2Freset.css;0;4
+FILE_NAME_2=5843;CSS;0;EUTF-8;1;1;0;%2Fhome%2Fgema%2FDownloads%2Fauto-hiding-navigation%2Fauto-hiding-navigation%2Fcss%2Fstyle.css;0;4
+FILE_NAME_3=1235;CSS;0;EUTF-8;1;1;0;%2Fhome%2Fgema%2FA%2FPyProject%2Ftrydjango19%2Fsrc%2Fstatic%2Fcss%2Fstyle.css;0;4

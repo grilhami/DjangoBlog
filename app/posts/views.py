@@ -13,11 +13,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 #model
 from .models import Post
 from .forms import PostForm
+from braces.views import LoginRequiredMixin
 
 
 class SearchMixins(object):
 
-    pass
+    def get(self):
+        pass
 
 class PostListView(ListView):
 
@@ -33,7 +35,7 @@ class PostListView(ListView):
                 Q(title__icontains=q)|
                 Q(content__icontains=q)|
                 Q(user__first_name__icontains=q)|
-                Q(user__last_name__icontains=q)
+                Q(user__last_nae__icontains=q)
                 ).distinct()
 
             return queryset
@@ -45,11 +47,11 @@ class PostDetailView(DetailView):
 
     model = Post
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
 
     model = Post
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
 
     model = Post
 

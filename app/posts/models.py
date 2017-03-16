@@ -6,7 +6,7 @@ from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.conf import settings
 from django.utils import timezone
-from core.models import TimestampedModel
+from app.core.models import TimestampedModel
 from markdown_deux import markdown
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType 
