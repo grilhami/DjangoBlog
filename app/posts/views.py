@@ -18,8 +18,18 @@ from braces.views import LoginRequiredMixin
 
 class SearchMixins(object):
 
-    def get(self):
-        pass
+    def get_queryset(self):
+        queryset = super(SearchMixins, self).get_queryset()
+
+        q = self.request.GET.get("q")
+        if q:
+            queryset = queryset.filter(
+                Q(title__icontains=q)|
+                Q(content__icontains=q)|
+                Q(user__first_name__icontains=q)|
+                Q(user__last_nae__icontains=q)
+                ).distinct()
+        return queryset
 
 class PostListView(ListView):
 
@@ -29,19 +39,7 @@ class PostListView(ListView):
 
     def get_queryset(self):
         queryset = Post.objects.active()
-        q = self.request.GET.get("q")
-        if q:
-            queryset = queryset.filter(
-                Q(title__icontains=q)|
-                Q(content__icontains=q)|
-                Q(user__first_name__icontains=q)|
-                Q(user__last_nae__icontains=q)
-                ).distinct()
-
-            return queryset
-
-        else:
-            return queryset
+        return queryset
 
 class PostDetailView(DetailView):
 
