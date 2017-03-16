@@ -4,6 +4,13 @@ jQuery(document).ready(function($){
 		//this applies only if secondary nav is below intro section
 		belowNavHeroContent = $('.sub-nav-hero'),
 		headerHeight = mainHeader.height();
+
+	// Submit post on submit
+	$('#post-form').on('submit', function(event){
+		event.preventDefault();
+		console.log("form submitted!")  // sanity check
+		create_post();
+	});	
 	
 	//set scrolling variables
 	var scrolling = false,
