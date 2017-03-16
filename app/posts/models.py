@@ -106,19 +106,19 @@ Another Models for comment and likes.
 """
 class Comment(TimestampedModel):
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
-    post = models.ForeignKey(Post)
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
+    # post = models.ForeignKey(Post)
 
-    # content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    # object_id = models.PositiveIntegerField()
-    # content_object = GenericForeignKey('content_type', 'object_id')
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     content = models.TextField(max_length=200)
 
-    def __str__(self):
+    # def __str__(self):
 
-        return self.user.username
+    #     return self.user.username
 
-    def __unicode__(self):
+    # def __unicode__(self):
         
-        return self.user.username
+    #     return self.user.username
