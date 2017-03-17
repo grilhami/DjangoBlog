@@ -89,6 +89,10 @@ class Post(models.Model):
     def like(self):
     
         pass
+    
+    @property
+    def commments(self):
+        return Comment.objects.filter_by_instance(instance)
 
 
 def create_slug(instance, new_slg=None):
