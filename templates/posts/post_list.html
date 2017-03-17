@@ -42,7 +42,7 @@
                         <a href="{{ obj.get_absolute_url }}">
                         Read more...
                         </a>
-                        <p class="post-meta">Posted by <a href="#">{{obj.user.username}}</a> on {{obj.created}}, {{obj.created|timesince}}</p>
+                        <p class="post-meta">Posted by <a href="#">{{obj.user.username}}</a> on {{obj.timestamp}, {{obj.timestamp|timesince}}</p>
                     </div>
                     
                     {% if request.user.is_authenticated %}
