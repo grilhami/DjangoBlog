@@ -14,9 +14,13 @@
         </div>
     </header>
     <div class="container">
+        {% if request.GET.q %}
+        <h1> Your search for {{ request.GET.q }} ..</h1>
+        {% endif %}
+
         {% if not object_list %}
-            <h1> Your search for {{ request.GET.q }} ..</h1>
-            <p> No maj .. </p>
+        <h3>No results found</h3>
+        <p> No maj .. </p>
         {% endif %}
        
         <div class="row">
@@ -42,7 +46,7 @@
                         <a href="{{ obj.get_absolute_url }}">
                         Read more...
                         </a>
-                        <p class="post-meta">Posted by <a href="#">{{obj.user.username}}</a> on {{obj.timestamp}, {{obj.timestamp|timesince}}</p>
+                        <p class="post-meta">Posted by <a href="#">{{obj.user.username}}</a> on {{obj.timestamp}}, {{obj.timestamp|timesince}}</p>
                     </div>
                     
                     {% if request.user.is_authenticated %}

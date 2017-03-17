@@ -12,6 +12,18 @@ from django.utils import timezone
 from markdown_deux import markdown
 
 
+class CommentManager(models.Manager):
+    
+    def filter_by_instance(self, instance):
+        content_type = ContentType.objects.get_for_model(instance.__class__)
+        obj_id = instance.id
+        # Post.objects.get(id=instance.id)
+        return super(
+            CommentManager, self).filter(
+                content_type=content_type,
+                 object_id=obj_id)
+        # comments = Comment.objects.filter(content_type=content_type, object_id=obj_id)
+
 
 class PostManager(models.Manager):
     
@@ -110,11 +122,11 @@ class Comment(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
-
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+    objects = CommentManager()
     content = models.TextField(max_length=200)
 
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
 

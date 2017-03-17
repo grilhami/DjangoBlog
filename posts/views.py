@@ -103,10 +103,8 @@ def post_create(request):
 def post_detail(request, slg=None):
     instance = get_object_or_404(Post,slg=slg)
     share_string = quote_plus(instance.content)
-    content_type = ContentType.objects.get_for_model(Post)
-    obj_id = instance.id
-    # Post.objects.get(id=instance.id)
-    comments = Comment.objects.filter(content_type=content_type, object_id=obj_id)
+
+    comments = Comment.objects.filter_by_instance(instance)
 
     return render(request, "posts/post_detail.html", {
     "title": instance.title,
