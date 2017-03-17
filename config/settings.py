@@ -45,8 +45,8 @@ INSTALLED_APPS = [
 
     # local apps
     # 'app.authentication',
-    'app.core',
-    'app.posts',
+    # 'core',
+    'posts',
 
 ]
 
@@ -86,14 +86,20 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
 DATABASES = {
-        'default': {
-        'ENGINE':'django.db.backends.mysql',
-        'OPTIONS':{
-            'read_default_file': os.path.join(BASE_DIR, 'dbconf.cnf')
-           }
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME':  os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+# DATABASES = {
+#         'default': {
+#         'ENGINE':'django.db.backends.mysql',
+#         'OPTIONS':{
+#             'read_default_file': os.path.join(BASE_DIR, 'dbconf.cnf')
+#            }
+#         }
         # 'default': {
         #     'ENGINE':'django.db.backends.postgresql',
         #     'NAME':'trydjango',
@@ -111,7 +117,7 @@ DATABASES = {
     #            'autocommit':True
     #            }
 
-        }
+        # }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

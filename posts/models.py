@@ -1,15 +1,15 @@
 from __future__ import unicode_literals
 
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType 
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.conf import settings
 from django.utils import timezone
-from app.core.models import TimestampedModel
+# from core.models import TimestampedModel
 from markdown_deux import markdown
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType 
 
 
 
@@ -28,7 +28,7 @@ def upload_location(instance, filename):
     return "{}/{}".format(instance.id, filename)
 
 
-class Post(TimestampedModel):
+class Post(models.Model):
     
     user = models.ForeignKey(settings.AUTH_USER_MODEL,default=1)
     title = models.CharField(max_length=120)
@@ -45,12 +45,10 @@ class Post(TimestampedModel):
     likes = models.PositiveIntegerField(default=0)
     draft = models.BooleanField(default=False)
     publish = models.DateTimeField(auto_now=False, auto_now_add=False)
-    objects = PostManager()
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
-    def __uncicode__(self):
-    
-        return self.title
-	
+    objects = PostManager()
     def __str__(self):
     
         return self.title
@@ -104,9 +102,9 @@ pre_save.connect(pre_save_post_receiver, sender=Post)
 """
 Another Models for comment and likes.
 """
-class Comment(TimestampedModel):
+class Comment(models.Model):
 
-    # user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     # post = models.ForeignKey(Post)
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
@@ -115,10 +113,13 @@ class Comment(TimestampedModel):
 
     content = models.TextField(max_length=200)
 
-    # def __str__(self):
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
-    #     return self.user.username
+    def __str__(self):
 
-    # def __unicode__(self):
+        return self.content
+
+    def __unicode__(self):
         
-    #     return self.user.username
+        return self.content

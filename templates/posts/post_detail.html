@@ -47,10 +47,12 @@
         </div>
 
         <div class="row">
-            {{instance.comment_set.all}}
+            <h1> Comments </h1>
+            {% comment %}{{instance.comment_set.all}}{% endcomment %}
 
-            {% for c in instance.comment_set.all %}
-                {{instance.comment.content}}
+            {% for c in comments %}
+                {{c}}
+                by {{c.user}}, {{ c.timestamp | timesince }} ago
             {% endfor %}
         </div>
         
