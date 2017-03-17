@@ -16,6 +16,7 @@ SECRET_KEY = os.environ['BATMAN_IS_BRUCE_WAYNE']
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT_DIR = os.path.dirname(BASE_DIR)
 # BASE_DIR = Path(__file__).ancestor(2)
 
 # Quick-start development settings - unsuitable for production
@@ -155,11 +156,11 @@ STATICFILES_DIRS = [
         #'/var/www/static',
         ]
 
-STATIC_ROOT =   os.path.join(BASE_DIR, "static_cdn") 
+STATIC_ROOT =   os.path.join(ROOT_DIR, "static_cdn") 
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
+MEDIA_ROOT = os.path.join(ROOT_DIR, "media_cdn")
 
 
 # Theme options `default`, `roman`, `mani`, `flat`, `bootstrap`, `tim`, `beagle`

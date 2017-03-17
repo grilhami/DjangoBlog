@@ -22,4 +22,4 @@ class CommentModelAdmin(admin.ModelAdmin):
 		model = Comment
 
 admin.site.register(Post, PostModelAdmin)
-# admin.site.register(Comment, CommentModelAdmin)
+admin.site.register(Comment)
