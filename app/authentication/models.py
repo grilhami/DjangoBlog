@@ -4,14 +4,14 @@ from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin
 )
-from core.models import TimestampedModel
+from app.core.models import TimestampedModel
 import jwt
 
 
-class UserManager(BaseUserManager):
+class UserManager(BaseUserManager, TimestampedModel):
 	
 	pass
 	
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, TimestampedModel):
 	
 	pass

@@ -16,7 +16,7 @@ from .forms import PostForm
 from braces.views import LoginRequiredMixin
 
 
-class SearchMixins(object):
+class SearchMixin(object):
 
     def get_queryset(self):
         queryset = super(SearchMixins, self).get_queryset()
@@ -31,7 +31,7 @@ class SearchMixins(object):
                 ).distinct()
         return queryset
 
-class PostListView(ListView):
+class PostListView(SearchMixin, ListView):
 
     model = Post
     paginate_by = 3
@@ -94,8 +94,7 @@ def post_create(request):
         print (tits)
         instance.save()
         return HttpResponseRedirect(instance.get_absolute_url())
-
-        # messages.success(request, "Successfully Created")
+        messages.success(request, "Successfully Created")
     return render(request, "posts/post_form.html",{
                 "form":form,
     })

@@ -15,9 +15,8 @@
     </header>
     <div class="container">
         {% if not object_list %}
-            <h1> No matches found </h1>
-
-            <p> Ooopss, ga nemu cuy.. </p>
+            <h1> Your search for {{ request.GET.q }} ..</h1>
+            <p> No maj .. </p>
         {% endif %}
        
         <div class="row">
