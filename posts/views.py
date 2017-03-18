@@ -1,5 +1,13 @@
 from django.utils import timezone
-from urllib import quote_plus
+try:
+    from urllib import quote_plus
+except:
+    pass
+try:
+    from urllib.parse import quote_plus
+except:
+    pass
+
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
@@ -109,10 +117,9 @@ def post_detail(request, slg=None):
     }
     comment_form = CommentForm(request.POST or None, initial=initial_data)
     if comment_form.is_valid():
-        print (comment_form.cleaned_data)
-        # instance = form.save(commit=False)
-        # instance.user = request.user
-        # instance.save()
+        c_type = comment_form.cleaned_data.get("content_type")
+        obj_id = form.cleaned_data.get('object_id')
+        content_data = comment_form.cleaned_data.get("content")
 
     comments = instance.comments
 
