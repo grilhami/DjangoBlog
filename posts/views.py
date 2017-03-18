@@ -102,11 +102,17 @@ def post_create(request):
 def post_detail(request, slg=None):
     instance = get_object_or_404(Post,slg=slg)
     share_string = quote_plus(instance.content)
-    comment_form = CommentForm(request.POST or None)
+    
+    initial_data = {
+        "content_type": instance.get_content_type,
+        "object_id": instance.id
+    }
+    comment_form = CommentForm(request.POST or None, initial=initial_data)
     if comment_form.is_valid():
-        instance = form.save(commit=False)
-        instance.user = request.user
-        instance.save()
+        print (comment_form.cleaned_data)
+        # instance = form.save(commit=False)
+        # instance.user = request.user
+        # instance.save()
 
     comments = instance.comments
 
@@ -115,6 +121,7 @@ def post_detail(request, slg=None):
     "instance":instance,
     "share_string":share_string,
     "comments": comments,
+    "comment_form": comment_form,
     })
 
 
