@@ -48,6 +48,10 @@
 
     <div class="row col-md-8 col-md-offset-2">
         <p class="lead">Comments</p>
+        <form method="POST" action="."> {% csrf_token %}
+            {{ comment_form }}
+            <input type="submit" value="Post Comment" class="btn btn-default">
+        </form>
         <hr />
         {% for c in comments %}
             <blockquote>
