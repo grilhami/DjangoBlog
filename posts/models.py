@@ -61,8 +61,8 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     objects = PostManager()
+
     def __str__(self):
-    
         return self.title
 
     def get_absolute_url(self):
@@ -73,27 +73,24 @@ class Post(models.Model):
         return reverse("posts:detail", kwargs={"slg":self.slg})
 
     def get_likes(self):
-    
         return self.likes.count()
 
     def get_id_url(self):
-    
         return reverse("posts:detail", kwargs={"id":self.id})
 
     def get_markdown(self):
-    
         content = self.content
         markdown_text = markdown(content)
         return markdown_text
 
-    def like(self):
-    
-        pass
-    
     @property
-    def commments(self):
-        return Comment.objects.filter_by_instance(instance)
+    def comments(self):
+        return Comment.objects.filter_by_instance(instance=self)
 
+    @property
+    def get_content_type(self):
+        instance = self
+        return ContentType.objects.get_for_model(instance.__class__)
 
 def create_slug(instance, new_slg=None):
     

@@ -39,25 +39,24 @@
     
         
 
-        <div class="row">
+        <div class="row col-lg-8 col-lg-offset-2">
             {% if request.user.is_staff or request.user.is_superuser %}
                 <a href="{{instance.get_absolute_url}}edit">edit</a>
                 <a href="{{instance.get_absolute_url}}delete">delete</a>
             {% endif %}
         </div>
 
-        <div class="row">
-            <h1> Comments </h1>
-            {% comment %}{{instance.comment_set.all}}{% endcomment %}
-            <ul>
-            {% for c in comments %}
-                <li>{{c}}
-                by {{c.user}}, {{ c.timestamp | timesince }} ago
-                </li>
-            {% endfor %}
-            </ul>
-        </div>
-        
+    <div class="row col-md-8 col-md-offset-2">
+        <p class="lead">Comments</p>
+        <hr />
+        {% for c in comments %}
+            <blockquote>
+                <p>{{c.content}}</p>
+                <small>via {{c.user}}, on {{c.timestamp|timesince}}</small>
+            </blockquote>
+        </hr>
+        {% endfor %}
+    </div>
  </div>
 {% endblock content %}
 <!--

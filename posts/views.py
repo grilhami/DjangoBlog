@@ -3,7 +3,6 @@ from urllib import quote_plus
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 #paginator
@@ -13,7 +12,7 @@ from django.views.generic import ListView, CreateView, DetailView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 #model
 from .models import Post, Comment
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from braces.views import LoginRequiredMixin
 
 
@@ -103,8 +102,13 @@ def post_create(request):
 def post_detail(request, slg=None):
     instance = get_object_or_404(Post,slg=slg)
     share_string = quote_plus(instance.content)
+    comment_form = CommentForm(request.POST or None)
+    if comment_form.is_valid():
+        instance = form.save(commit=False)
+        instance.user = request.user
+        instance.save()
 
-    comments = Comment.objects.filter_by_instance(instance)
+    comments = instance.comments
 
     return render(request, "posts/post_detail.html", {
     "title": instance.title,
