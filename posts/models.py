@@ -14,6 +14,10 @@ from markdown_deux import markdown
 
 class CommentManager(models.Manager):
     
+    def all(self):
+        qs = super(CommentManager, self).filter(parent=None)
+        return qs
+    
     def filter_by_instance(self, instance):
         content_type = ContentType.objects.get_for_model(instance.__class__)
         obj_id = instance.id
@@ -21,7 +25,8 @@ class CommentManager(models.Manager):
         return super(
             CommentManager, self).filter(
                 content_type=content_type,
-                 object_id=obj_id)
+                 object_id=obj_id,
+                 parent=None)
         # comments = Comment.objects.filter(content_type=content_type, object_id=obj_id)
 
 
@@ -59,6 +64,11 @@ class Post(models.Model):
     publish = models.DateTimeField(auto_now=False, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    class Meta:
+        ordering = [
+            '-timestamp'
+        ]
 
     objects = PostManager()
 
@@ -123,11 +133,16 @@ class Comment(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
+    parent = models.ForeignKey("self", null=True, blank=True)
+
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     objects = CommentManager()
     content = models.TextField(max_length=200)
 
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+    class Meta:
+        ordering = ['-timestamp']
 
     def __str__(self):
 
@@ -136,3 +151,12 @@ class Comment(models.Model):
     def __unicode__(self):
         
         return self.content
+
+    def children(self): # replies
+        return Comment.objects.filter(parent=self)
+    
+    @property
+    def is_parent(self):
+        if self.parent is not None:
+            return False
+        return True

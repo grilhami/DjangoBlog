@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load urlify %}
+{% load crispy_forms_tags %}
 {% block head_title %}
     {{ instance.title }} - {{block.super}}
 {% endblock head_title %}
@@ -48,15 +49,43 @@
 
     <div class="row col-md-8 col-md-offset-2">
         <p class="lead">Comments</p>
+        
+        
+        
+        
+        {% comment %} This is parent comment form{% endcomment %}
         <form method="POST" action="."> {% csrf_token %}
-            {{ comment_form }}
-            <input type="submit" value="Post Comment" class="btn btn-default">
+            {{ comment_form|crispy }}
+        {% if request.user.is_authenticated %}
+        <input type="submit" value="Post Comment" class="btn btn-default">
+        {% endif %}
         </form>
         <hr />
+
+
+
         {% for c in comments %}
             <blockquote>
                 <p>{{c.content}}</p>
                 <small>via {{c.user}}, on {{c.timestamp|timesince}}</small>
+
+            {% for child_comment in comments.children  %}
+          
+            <blockquote>
+                <p>{{child_comment.content}}</p>
+                <small>via {{child_comment.user}}, on {{child_comment.timestamp|timesince}}</small>
+            </blockquote>
+            {% endfor %}
+
+
+
+        <form method="POST" action="."> {% csrf_token %}
+            {{ comment_form|crispy }}
+        {% if request.user.is_authenticated %}
+        <input type="submit" value="Post Comment" class="btn btn-default">
+        {% endif %}
+        </form>
+
             </blockquote>
         </hr>
         {% endfor %}
