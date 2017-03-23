@@ -524,3 +524,8 @@ Intro Section
     margin-top: 80px;
   }
 }
+
+
+.asteriskField {
+    display: none;
+}

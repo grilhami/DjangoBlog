@@ -197,3 +197,7 @@ MEDIUM_EDITOR_OPTIONS = {
     }
 
 }
+
+ABSOLUTE_URL_OVERRIDES = {
+    'posts.models': lambda o: "/posts/%s/%s/" % (o.id, o.slg),
+}
