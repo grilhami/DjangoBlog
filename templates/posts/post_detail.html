@@ -78,13 +78,15 @@
             {% endfor %}
 
 
-
+{% comment %}{% endcomment %}
+     {% if request.user.is_authenticated %}
         <form method="POST" action="."> {% csrf_token %}
             {{ comment_form|crispy }}
         {% if request.user.is_authenticated %}
-        <input type="submit" value="Post Comment" class="btn btn-default">
+        <input type="submit" value="Reply comment" class="btn btn-default">
         {% endif %}
         </form>
+    {% endif %}
 
             </blockquote>
         </hr>

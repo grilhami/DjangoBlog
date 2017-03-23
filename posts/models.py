@@ -80,7 +80,8 @@ class Post(models.Model):
         You could get it both ways
         return "/posts/%s/" % (self.id)
         """
-        return reverse("posts:detail", kwargs={"slg":self.slg})
+        # return reverse("posts:detail", kwargs={"id":self.id ,"slg":self.slg})
+        return "/posts/%s/%s/" % (self.id, self.slg)
 
     def get_likes(self):
         return self.likes.count()

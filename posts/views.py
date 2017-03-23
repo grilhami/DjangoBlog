@@ -52,19 +52,6 @@ class PostListView(SearchMixin, ListView):
         queryset = Post.objects.active()
         return queryset
 
-class PostDetailView(DetailView):
-
-    model = Post
-
-class PostCreateView(LoginRequiredMixin, CreateView):
-
-    model = Post
-
-class PostDeleteView(LoginRequiredMixin, DeleteView):
-
-    model = Post
-
-
 def post_list(request):
     # if request.user.is_authenticated():
     today = timezone.now().date()
@@ -89,8 +76,7 @@ def post_list(request):
        queryset = paginator.page(paginator.num_pages)
 
     return render(request,"posts/post_list.html",{
-        "object_list": queryset,
-        "title": "List"
+        "object_list": queryset
         })
 
 @login_required
@@ -110,8 +96,9 @@ def post_create(request):
                 "form":form,
     })
 
-def post_detail(request, slg=None):
-    instance = get_object_or_404(Post,slg=slg)
+def post_detail(request, pk=None, slg=None):
+    pk = pk
+    instance = get_object_or_404(Post, slg=slg)
     share_string = quote_plus(instance.content)
     
     initial_data = {
@@ -157,7 +144,7 @@ def post_detail(request, slg=None):
 
 
 @login_required
-def post_update(request, slg=None):
+def post_update(request, pk=None, slg=None):
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
     instance = get_object_or_404(Post, slg=slg)
@@ -176,7 +163,7 @@ def post_update(request, slg=None):
 
 
 @login_required
-def post_delete(request, slg=None):
+def post_delete(request,pk=None, slg=None):
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
     instance = get_object_or_404(Post, slg=slg)
