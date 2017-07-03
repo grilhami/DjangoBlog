@@ -47,10 +47,11 @@ class Post(TimestampedModel):
     publish = models.DateTimeField(auto_now=False, auto_now_add=False)
     objects = PostManager()
 
+    # Preferrable method than __str__
     def __uncicode__(self):
     
         return self.title
-	
+    # Old method 
     def __str__(self):
     
         return self.title
